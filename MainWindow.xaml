@@ -1,0 +1,52 @@
+﻿<Window x:Class="Reflasher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Reflasher"
+        mc:Ignorable="d" Topmost="True"
+        Title="Reflasher" Height="200" Width="800">
+
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="{Binding CU1Label}" Grid.Column="0" HorizontalAlignment="Center"/>
+        <Label Content="{Binding CU2Label}" Grid.Column="1" HorizontalAlignment="Center"/>
+        <Label Content="{Binding CU3Label}" Grid.Column="2" HorizontalAlignment="Center"/>
+        <Label Content="{Binding CU4Label}" Grid.Column="3" HorizontalAlignment="Center"/>
+
+        <ListBox ItemsSource="{Binding CU1Log}" Background="{Binding CU1Color}" 
+            Panel.ZIndex="1" Grid.Column="0" Grid.Row="1" Opacity="0.85"/>
+        <ListBox ItemsSource="{Binding CU2Log}" Background="{Binding CU2Color}" 
+            Panel.ZIndex="1" Grid.Column="1" Grid.Row="1" Opacity="0.85"/>
+        <ListBox ItemsSource="{Binding CU3Log}" Background="{Binding CU3Color}" 
+            Panel.ZIndex="1" Grid.Column="2" Grid.Row="1" Opacity="0.85"/>
+        <ListBox ItemsSource="{Binding CU4Log}" Background="{Binding CU4Color}" 
+            Panel.ZIndex="1" Grid.Column="3" Grid.Row="1" Opacity="0.85"/>
+
+        <Label Content="CU1" FontSize="72" Grid.Row="1" Grid.Column="0" FontWeight="Bold"
+            VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="CU2" FontSize="72" Grid.Row="1" Grid.Column="1"  FontWeight="Bold"
+            VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="CU3" FontSize="72" Grid.Row="1" Grid.Column="2"  FontWeight="Bold"
+            VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="CU4" FontSize="72" Grid.Row="1" Grid.Column="3"  FontWeight="Bold"
+            VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+    </Grid>
+</Window>
