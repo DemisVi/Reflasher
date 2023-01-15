@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Management;
 
 namespace Reflasher
 {
@@ -22,22 +23,34 @@ namespace Reflasher
             _cuName = cuName;
         }
 
-        public void Run() => Task.Factory.StartNew(() =>
+        public void Run() => Task.Factory.StartNew(Write);
+
+        private void Write()
         {
-            var counter = 1;
+            var counter = 0;
+            ManagementEventWatcher watcher = new();
             while (true)
             {
                 counter++;
                 lock (_lock)
                 {
+                    watcher.Query = WqlQueries.creationTsQuery;
+                    watcher.WaitForNextEvent();
+                    watcher.Stop();
+
                     _reporter.Report(Thread.CurrentThread.ManagedThreadId.ToString() + " reporting " + _cuName);
                     _reporter.Color(Brushes.Wheat);
-                    Thread.Sleep(555);
+
+                    // some process launch work
+
+                    watcher.Query = WqlQueries.deletionTsQuery;
+                    watcher.WaitForNextEvent();
+                    watcher.Stop();
                 }
                 _reporter.Color(Brushes.White);
-                if (counter % 5 == 0) _reporter.LogClear();
+                if (counter % 2 == 0 && counter > 0) return;
                 Thread.Sleep(111);
             }
-        });
+        }
     }
 }
