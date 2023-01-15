@@ -16,9 +16,9 @@ namespace Reflasher
             OnClear = clear;
         }
 
-        public event Action<string>? OnProgress;
-        public event Action<Brush>? OnBrush;
-        public event Action OnClear;
+        private event Action<string>? OnProgress;
+        private event Action<Brush>? OnBrush;
+        private event Action OnClear;
 
         public void Report(string value) => OnProgress?.Invoke(value);
         public void Color(Brush color) => OnBrush?.Invoke(color);

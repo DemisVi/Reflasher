@@ -13,14 +13,13 @@ namespace Reflasher
     internal class Writer
     {
         private readonly StatusReporter _reporter;
-        private readonly string? _cuLabel;
-        private readonly object _lock;
+        private readonly string? _cuName;
+        private readonly static object _lock = new();
 
-        public Writer(StatusReporter reporter, string? cuLabel, object lockObj)
+        public Writer(StatusReporter reporter, string? cuName)
         {
             _reporter = reporter;
-            _cuLabel = cuLabel;
-            _lock = lockObj;
+            _cuName = cuName;
         }
 
         public void Run() => Task.Factory.StartNew(() =>
@@ -31,7 +30,7 @@ namespace Reflasher
                 counter++;
                 lock (_lock)
                 {
-                    _reporter.Report(Thread.CurrentThread.ManagedThreadId.ToString() + " reporting " + _cuLabel);
+                    _reporter.Report(Thread.CurrentThread.ManagedThreadId.ToString() + " reporting " + _cuName);
                     _reporter.Color(Brushes.Wheat);
                     Thread.Sleep(555);
                 }

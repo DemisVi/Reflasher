@@ -6,7 +6,7 @@ namespace Reflasher
     public struct CUCollection
     {
         private const string _filePath = "./CUList.json";
-        private const string _defaultContent = "{\"CU1\":\"CU11\",\"CU2\":\"CU22\",\"CU3\":\"CU33\",\"CU4\":\"CU44\"}";
+        private const string _defaultContent = "{\"CU1\":\"CU011\",\"CU2\":\"CU022\",\"CU3\":\"CU033\",\"CU4\":\"CU044\"}";
 
         public string? CU1 { get; init; }
         public string? CU2 { get; init; }

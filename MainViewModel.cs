@@ -18,7 +18,6 @@ internal class MainViewModel : INotifyPropertyChanged
     private readonly object _ku2lock = new();
     private readonly object _ku3lock = new();
     private readonly object _ku4lock = new();
-    private readonly static object _syncLock = new();
 
     public ObservableCollection<string> CU1Log { get; } = new();
     public ObservableCollection<string> CU2Log { get; } = new();
@@ -51,10 +50,10 @@ internal class MainViewModel : INotifyPropertyChanged
         BindingOperations.EnableCollectionSynchronization(CU3Log, _ku3lock);
         BindingOperations.EnableCollectionSynchronization(CU4Log, _ku4lock);
 
-        _writer1 = new(new StatusReporter(CU1Log.Add, SetCU1Color, CU1Log.Clear), CU1Label, _syncLock);
-        _writer2 = new(new StatusReporter(CU2Log.Add, SetCU2Color, CU2Log.Clear), CU2Label, _syncLock);
-        _writer3 = new(new StatusReporter(CU3Log.Add, SetCU3Color, CU3Log.Clear), CU3Label, _syncLock);
-        _writer4 = new(new StatusReporter(CU4Log.Add, SetCU4Color, CU4Log.Clear), CU4Label, _syncLock);
+        _writer1 = new(new StatusReporter(CU1Log.Add, SetCU1Color, CU1Log.Clear), CU1Label);
+        _writer2 = new(new StatusReporter(CU2Log.Add, SetCU2Color, CU2Log.Clear), CU2Label);
+        _writer3 = new(new StatusReporter(CU3Log.Add, SetCU3Color, CU3Log.Clear), CU3Label);
+        _writer4 = new(new StatusReporter(CU4Log.Add, SetCU4Color, CU4Log.Clear), CU4Label);
 
         _writer1.Run();
         _writer2.Run();
